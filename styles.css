@@ -1010,10 +1010,21 @@ h1, h2, h3, h4, h5, h6 {
 
     .lace-frame-container {
         width: 95vw;
-        max-width: 420px;
+        max-width: 380px;
     }
 
     .photobooth-cell {
-        width: 140px;
+        width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .lace-frame-container {
+        width: 90vw;
+        max-width: 320px;
+    }
+
+    .photobooth-cell {
+        width: 100px;
     }
 }
