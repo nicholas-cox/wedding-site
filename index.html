@@ -14,54 +14,36 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Fixed Painting Background -->
-    <div class="painting-background"></div>
-    <div class="painting-overlay"></div>
+    <!-- Fixed Lace Corner Decorations -->
+    <img src="assets/images/decorative/lace_topleftcorner.png" alt="" class="fixed-lace fixed-lace-tl" aria-hidden="true">
+    <img src="assets/images/decorative/lace_topleftcorner.png" alt="" class="fixed-lace fixed-lace-tr" aria-hidden="true">
+    <img src="assets/images/decorative/lace_bottomrightcorner.png" alt="" class="fixed-lace fixed-lace-bl" aria-hidden="true">
+    <img src="assets/images/decorative/lace_bottomrightcorner.png" alt="" class="fixed-lace fixed-lace-br" aria-hidden="true">
 
-    <!-- Navigation -->
-    <nav class="main-nav" id="mainNav">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo">S & N</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#story">Our Story</a></li>
-                <li><a href="#schedule">Schedule</a></li>
-                <li><a href="#venue">Venue</a></li>
-                <li><a href="#registry">Registry</a></li>
-                <li><a href="#rsvp" class="nav-cta">RSVP</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
+    <!-- Hero Section - Clean & Bold -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <div class="lace-frame">
-                <h1 class="hero-names">Sarah Kobos<span class="ampersand">&</span>Nick Cox</h1>
-                <div class="hero-divider"></div>
-                <p class="hero-date">September 19, 2026</p>
-                <p class="hero-location">Beech Tree Cottages | Madison, Connecticut</p>
-                <div class="countdown" id="countdown">
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="days">---</span>
-                        <span class="countdown-label">Days</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="hours">--</span>
-                        <span class="countdown-label">Hours</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="minutes">--</span>
-                        <span class="countdown-label">Minutes</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="seconds">--</span>
-                        <span class="countdown-label">Seconds</span>
-                    </div>
+            <h1 class="hero-names"><span class="names-line">Sarah Kobos & Nick Cox</span><span class="getting-married">are getting married</span></h1>
+            <p class="hero-on">on</p>
+            <p class="hero-date">September 19, 2026</p>
+            <p class="hero-at">at</p>
+            <p class="hero-location">Beech Tree Cottages | Madison, Connecticut</p>
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">---</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">--</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">--</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">--</span>
+                    <span class="countdown-label">Seconds</span>
                 </div>
             </div>
         </div>
@@ -72,35 +54,44 @@
         </a>
     </section>
 
-    <!-- Main Content Wrapper -->
+    <!-- Main Content -->
     <main class="main-content">
 
-        <!-- Lace Divider -->
-        <div class="lace-divider">
-            <img src="lacesquare.png" alt="" aria-hidden="true">
-        </div>
+        <!-- Photobooth Section with Lace Frame -->
+        <section class="section photobooth-section" id="photobooth">
+            <div class="lace-frame-container">
+                <img src="assets/images/decorative/lace 6.png" alt="" class="lace-frame-bg" aria-hidden="true">
+                <div class="photobooth-grid" id="photoboothGrid">
+                    <div class="photobooth-cell" data-index="0">
+                        <img src="assets/images/decorative/filmframe.png" alt="" class="film-frame" aria-hidden="true">
+                        <img src="assets/images/photos/v2_v1.png" alt="Sarah and Nick" class="photobooth-photo">
+                    </div>
+                    <div class="photobooth-cell" data-index="1">
+                        <img src="assets/images/decorative/filmframe.png" alt="" class="film-frame" aria-hidden="true">
+                        <img src="assets/images/photos/v2_v6.png" alt="Sarah and Nick" class="photobooth-photo">
+                    </div>
+                    <div class="photobooth-cell" data-index="2">
+                        <img src="assets/images/decorative/filmframe.png" alt="" class="film-frame" aria-hidden="true">
+                        <img src="assets/images/photos/v2_v11.png" alt="Sarah and Nick" class="photobooth-photo">
+                    </div>
+                    <div class="photobooth-cell" data-index="3">
+                        <img src="assets/images/decorative/filmframe.png" alt="" class="film-frame" aria-hidden="true">
+                        <img src="assets/images/photos/v2_v16.png" alt="Sarah and Nick" class="photobooth-photo">
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Our Story Section -->
         <section class="section story-section" id="story">
             <div class="section-content">
-                <div class="story-hero-image">
-                    <img src="dogs.jpeg" alt="Our dogs">
-                </div>
                 <h2 class="section-title">Our Story</h2>
                 <div class="story-content">
-                    <div class="story-text">
-                        <p class="story-lead">A love story years in the making...</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                    <div class="story-image">
+                        <img src="assets/images/photos/proposal.jpeg" alt="Sarah and Nick's proposal">
                     </div>
-                </div>
-                <div class="photo-marquee">
-                    <div class="photo-marquee-inner" id="marqueeInner">
-                        <img src="v2_h1.png" alt="Sarah and Nick">
-                        <img src="v2_h2.png" alt="Sarah and Nick">
-                        <img src="v2_h3.png" alt="Sarah and Nick">
-                        <img src="v2_h4.png" alt="Sarah and Nick">
+                    <div class="story-text">
+                        <p>Quin and Lenny are still drafting up the story of how they introduced us, but we'll get it from them soon.</p>
                     </div>
                 </div>
             </div>
@@ -108,33 +99,27 @@
 
         <!-- Lace Divider -->
         <div class="lace-divider">
-            <img src="lacesquare.png" alt="" aria-hidden="true">
+            <img src="assets/images/decorative/lacesquare.png" alt="" aria-hidden="true">
         </div>
 
-        <!-- Photobooth Dimming Overlay -->
-        <div class="photobooth-dimmer" id="photoboothDimmer"></div>
-
-        <!-- Photobooth Section -->
-        <section class="section photobooth-section" id="photobooth">
-            <div class="photobooth-grid" id="photoboothGrid">
-                <div class="photobooth-cell" data-index="0">
-                    <img src="v2_v1.png" alt="Sarah and Nick">
-                </div>
-                <div class="photobooth-cell" data-index="1">
-                    <img src="v2_v6.png" alt="Sarah and Nick">
-                </div>
-                <div class="photobooth-cell" data-index="2">
-                    <img src="v2_v11.png" alt="Sarah and Nick">
-                </div>
-                <div class="photobooth-cell" data-index="3">
-                    <img src="v2_v16.png" alt="Sarah and Nick">
+        <!-- Venue Section -->
+        <section class="section venue-section" id="venue">
+            <div class="section-content">
+                <h2 class="section-title">The Venue</h2>
+                <div class="venue-content">
+                    <div class="venue-info">
+                        <h3>Beech Tree Cottages</h3>
+                        <p class="venue-address">Madison, Connecticut</p>
+                        <p class="venue-description">Nestled among the trees, Beech Tree Cottages offers the perfect setting for our celebration of love. Join us for an outdoor ceremony surrounded by nature's beauty, followed by dinner and dancing under the stars.</p>
+                        <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Get Directions</a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Lace Divider -->
         <div class="lace-divider">
-            <img src="lacesquare.png" alt="" aria-hidden="true">
+            <img src="assets/images/decorative/lacesquare.png" alt="" aria-hidden="true">
         </div>
 
         <!-- Schedule Section -->
@@ -182,68 +167,26 @@
             </div>
         </section>
 
-        <!-- Venue Section -->
-        <section class="section venue-section" id="venue">
-            <div class="section-content">
-                <h2 class="section-title">The Venue</h2>
-                <div class="venue-content">
-                    <div class="venue-info">
-                        <h3>Beech Tree Cottages</h3>
-                        <p class="venue-address">Madison, Connecticut</p>
-                        <p class="venue-description">Nestled among the trees, Beech Tree Cottages offers the perfect setting for our celebration of love. Join us for an outdoor ceremony surrounded by nature's beauty, followed by dinner and dancing under the stars.</p>
-                        <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Get Directions</a>
-                    </div>
-                    <div class="venue-image">
-                        <div class="lace-border">
-                            <img src="proposal.jpeg" alt="Sarah and Nick's proposal">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Lace Divider -->
+        <div class="lace-divider">
+            <img src="assets/images/decorative/lacesquare.png" alt="" aria-hidden="true">
+        </div>
 
         <!-- Registry Section -->
         <section class="section registry-section" id="registry">
             <div class="section-content">
                 <h2 class="section-title">Registry</h2>
-                <p class="registry-intro">Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a gift, we have registered at the following:</p>
-                <div class="registry-links">
-                    <a href="#" class="registry-card">
-                        <div class="registry-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><path d="M12 12V3"/><path d="m8 7 4-4 4 4"/><rect x="2" y="12" width="20" height="4" rx="1"/></svg>
-                        </div>
-                        <span>Registry One</span>
-                    </a>
-                    <a href="#" class="registry-card">
-                        <div class="registry-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-                        </div>
-                        <span>Registry Two</span>
-                    </a>
-                </div>
+                <p class="registry-intro">Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a gift, registry details will be available here soon.</p>
+                <p class="coming-soon">Coming Soon</p>
             </div>
         </section>
-
-        <!-- Lace Divider -->
-        <div class="lace-divider">
-            <img src="lacesquare.png" alt="" aria-hidden="true">
-        </div>
 
         <!-- RSVP Section -->
         <section class="section rsvp-section" id="rsvp">
             <div class="section-content">
                 <h2 class="section-title">RSVP</h2>
-                <p class="rsvp-intro">Please let us know if you'll be joining us by August 1, 2026</p>
-                <div class="rsvp-form-container">
-                    <!-- Placeholder for Google Form embed -->
-                    <div class="google-form-placeholder">
-                        <p>Google Form will be embedded here</p>
-                        <p class="placeholder-note">Replace this div with your Google Form embed code</p>
-                        <!-- Example embed code structure:
-                        <iframe src="YOUR_GOOGLE_FORM_URL" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-                        -->
-                    </div>
-                </div>
+                <p class="rsvp-intro">Please let us know if you'll be joining us by August 1, 2026. The RSVP form will be available here soon.</p>
+                <p class="coming-soon">Coming Soon</p>
             </div>
         </section>
 

@@ -229,10 +229,10 @@
 
         // All available photos
         const allPhotos = [
-            'v2_v1.png', 'v2_v2.png', 'v2_v3.png', 'v2_v4.png', 'v2_v5.png',
-            'v2_v6.png', 'v2_v7.png', 'v2_v8.png', 'v2_v9.png', 'v2_v10.png',
-            'v2_v11.png', 'v2_v12.png', 'v2_v13.png', 'v2_v14.png', 'v2_v15.png',
-            'v2_v16.png', 'v2_v17.png', 'v2_v18.png', 'v2_v19.png', 'v2_v20.png'
+            'assets/images/photos/v2_v1.png', 'assets/images/photos/v2_v2.png', 'assets/images/photos/v2_v3.png', 'assets/images/photos/v2_v4.png', 'assets/images/photos/v2_v5.png',
+            'assets/images/photos/v2_v6.png', 'assets/images/photos/v2_v7.png', 'assets/images/photos/v2_v8.png', 'assets/images/photos/v2_v9.png', 'assets/images/photos/v2_v10.png',
+            'assets/images/photos/v2_v11.png', 'assets/images/photos/v2_v12.png', 'assets/images/photos/v2_v13.png', 'assets/images/photos/v2_v14.png', 'assets/images/photos/v2_v15.png',
+            'assets/images/photos/v2_v16.png', 'assets/images/photos/v2_v17.png', 'assets/images/photos/v2_v18.png', 'assets/images/photos/v2_v19.png', 'assets/images/photos/v2_v20.png'
         ];
 
         const cells = photoboothGrid.querySelectorAll('.photobooth-cell');
@@ -240,7 +240,7 @@
 
         // Initialize current photos array
         cells.forEach(function(cell) {
-            const img = cell.querySelector('img');
+            const img = cell.querySelector('.photobooth-photo') || cell.querySelector('img');
             const src = img.getAttribute('src');
             currentPhotos.push(src);
         });
@@ -256,7 +256,7 @@
         // Swap a single cell's photo
         function swapPhoto(cellIndex) {
             const cell = cells[cellIndex];
-            const img = cell.querySelector('img');
+            const img = cell.querySelector('.photobooth-photo') || cell.querySelector('img');
             const newPhoto = getRandomPhoto();
 
             // Fade out
