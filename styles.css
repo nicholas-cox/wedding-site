@@ -184,7 +184,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding: 5vh 5% 0;
+    padding: 0 5% 10vh;
 }
 
 /* Fixed Lace Corner Decorations */
@@ -249,7 +249,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-on {
     font-family: var(--font-heading);
-    font-size: 2.2rem;
+    font-size: 1.4rem;
     font-weight: 400;
     color: var(--color-tan);
     letter-spacing: 0.1em;
