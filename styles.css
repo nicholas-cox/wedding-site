@@ -741,6 +741,18 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-forest);
 }
 
+.venue-info .btn {
+    margin: 0.5rem;
+}
+
+@media (max-width: 480px) {
+    .venue-info .btn {
+        display: block;
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+}
+
 /* ==========================================================================
    Registry Section
    ========================================================================== */
