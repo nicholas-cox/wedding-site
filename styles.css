@@ -660,6 +660,47 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
+   Attire Section
+   ========================================================================== */
+
+.attire-section .section-content {
+    text-align: center;
+}
+
+.attire-description {
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-cream);
+}
+
+.color-palette {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.color-swatch {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid rgba(240, 240, 224, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 480px) {
+    .color-swatch {
+        width: 50px;
+        height: 50px;
+    }
+
+    .color-palette {
+        gap: 1rem;
+    }
+}
+
+/* ==========================================================================
    Venue Section
    ========================================================================== */
 
@@ -678,6 +719,10 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
 
+.venue-info + .venue-info {
+    margin-top: 2.5rem;
+}
+
 .venue-info h3 {
     font-family: var(--font-heading);
     font-size: 1.8rem;
@@ -693,8 +738,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .venue-description {
+    max-width: 500px;
+    margin: 0 auto 2rem;
     color: #c8c9bc;
-    margin-bottom: 2rem;
 }
 
 .lace-border {
@@ -739,6 +785,17 @@ h1, h2, h3, h4, h5, h6 {
 .btn-outline:hover {
     background: var(--color-gold);
     color: var(--color-forest);
+}
+
+.btn-primary {
+    border: 1px solid var(--color-gold);
+    background: var(--color-gold);
+    color: var(--color-forest);
+}
+
+.btn-primary:hover {
+    background: transparent;
+    color: var(--color-gold);
 }
 
 .venue-info .btn {
