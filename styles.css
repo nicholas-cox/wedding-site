@@ -1097,3 +1097,281 @@ h1, h2, h3, h4, h5, h6 {
         width: 100px;
     }
 }
+
+/* ==========================================================================
+   RSVP Form
+   ========================================================================== */
+
+.rsvp-section .section-content {
+    background: rgba(240, 240, 224, 0.1);
+    padding: 3rem;
+    border: 1px solid rgba(240, 240, 224, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.rsvp-intro {
+    text-align: center;
+    color: #c8c9bc;
+    margin-bottom: 2rem;
+}
+
+.rsvp-step {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.rsvp-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--color-cream);
+    margin-bottom: 0.5rem;
+}
+
+.rsvp-input {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-dark);
+    background: var(--color-cream);
+    border: 1px solid rgba(240, 240, 224, 0.3);
+    border-radius: 2px;
+    transition: var(--transition-smooth);
+}
+
+.rsvp-input:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 2px rgba(222, 186, 120, 0.2);
+}
+
+.rsvp-input.input-error {
+    border-color: var(--color-burgundy);
+    box-shadow: 0 0 0 2px rgba(131, 57, 64, 0.4);
+}
+
+.rsvp-input::placeholder {
+    color: #999;
+}
+
+.rsvp-lookup-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+.rsvp-lookup-row .rsvp-input {
+    flex: 1;
+}
+
+.rsvp-lookup-row .btn {
+    white-space: nowrap;
+}
+
+.rsvp-error {
+    color: var(--color-cream);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    background: var(--color-burgundy);
+    padding: 0.75rem 1rem;
+    border-radius: 2px;
+}
+
+.rsvp-error a {
+    color: var(--color-cream);
+    text-decoration: underline;
+}
+
+.rsvp-back-btn {
+    background: none;
+    border: none;
+    color: var(--color-tan);
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 1rem;
+    transition: var(--transition-smooth);
+}
+
+.rsvp-back-btn:hover {
+    color: var(--color-cream);
+}
+
+.rsvp-household-intro {
+    color: var(--color-cream);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.rsvp-guest-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.rsvp-guest-item {
+    background: rgba(240, 240, 224, 0.08);
+    padding: 1.25rem;
+    border: 1px solid rgba(240, 240, 224, 0.15);
+    border-radius: 2px;
+}
+
+.rsvp-guest-name {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--color-cream);
+    margin-bottom: 1rem;
+}
+
+.rsvp-guest-options {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.rsvp-radio-label,
+.rsvp-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: #c8c9bc;
+    font-size: 0.95rem;
+}
+
+.rsvp-radio-label input,
+.rsvp-checkbox-label input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-gold);
+    cursor: pointer;
+}
+
+.rsvp-meal-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(240, 240, 224, 0.1);
+}
+
+.rsvp-meal-label {
+    font-size: 0.85rem;
+    color: var(--color-tan);
+    margin-bottom: 0.5rem;
+}
+
+.rsvp-meal-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.rsvp-meal-option span {
+    color: #c8c9bc;
+}
+
+.rsvp-plus-one {
+    background: rgba(240, 240, 224, 0.08);
+    padding: 1.25rem;
+    border: 1px solid rgba(240, 240, 224, 0.15);
+    border-radius: 2px;
+}
+
+.rsvp-plus-one-header {
+    margin-bottom: 0;
+}
+
+.rsvp-plus-one-details {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(240, 240, 224, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.rsvp-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.rsvp-email-field {
+    margin-top: 0.5rem;
+}
+
+.rsvp-submit {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.rsvp-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.rsvp-success-message {
+    text-align: center;
+}
+
+.rsvp-success-message h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--color-gold);
+    margin-bottom: 1rem;
+}
+
+.rsvp-success-message p {
+    color: #c8c9bc;
+    margin-bottom: 1.5rem;
+}
+
+.rsvp-summary {
+    text-align: left;
+    background: rgba(240, 240, 224, 0.08);
+    padding: 1.25rem;
+    border: 1px solid rgba(240, 240, 224, 0.15);
+    border-radius: 2px;
+}
+
+.rsvp-summary ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rsvp-summary li {
+    padding: 0.5rem 0;
+    color: #c8c9bc;
+    border-bottom: 1px solid rgba(240, 240, 224, 0.1);
+}
+
+.rsvp-summary li:last-child {
+    border-bottom: none;
+}
+
+.rsvp-summary strong {
+    color: var(--color-cream);
+}
+
+@media (max-width: 600px) {
+    .rsvp-lookup-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .rsvp-lookup-row .btn {
+        width: 100%;
+    }
+
+    .rsvp-guest-options {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}

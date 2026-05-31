@@ -216,8 +216,78 @@
         <section class="section rsvp-section" id="rsvp">
             <div class="section-content">
                 <h2 class="section-title">RSVP</h2>
-                <p class="rsvp-intro">Please let us know if you'll be joining us by August 1, 2026. The RSVP form will be available here soon.</p>
-                <p class="coming-soon">Coming Soon</p>
+                <p class="rsvp-intro">Please let us know if you'll be joining us by August 1, 2026.</p>
+
+                <!-- Step 1: Name Lookup -->
+                <div id="rsvpLookup" class="rsvp-step">
+                    <form id="rsvpLookupForm" class="rsvp-form">
+                        <label for="guestNameInput" class="rsvp-label">Enter your name as it appears on your invitation</label>
+                        <div class="rsvp-lookup-row">
+                            <input type="text" id="guestNameInput" class="rsvp-input" placeholder="First and Last Name" required>
+                            <button type="submit" class="btn btn-primary">Find My Invitation</button>
+                        </div>
+                        <p id="lookupError" class="rsvp-error" hidden>
+                            We couldn't find that name. Please try again or contact <a href="mailto:nicholasericcox@gmail.com">nicholasericcox@gmail.com</a> for assistance.
+                        </p>
+                    </form>
+                </div>
+
+                <!-- Step 2: RSVP Form (shown after successful lookup) -->
+                <div id="rsvpForm" class="rsvp-step" hidden>
+                    <button type="button" id="rsvpBackBtn" class="rsvp-back-btn">&larr; Search for a different name</button>
+                    <form id="rsvpResponseForm" class="rsvp-form">
+                        <p class="rsvp-household-intro">Please respond for your party:</p>
+
+                        <!-- Guest list will be populated by JavaScript -->
+                        <div id="rsvpGuestList" class="rsvp-guest-list"></div>
+
+                        <!-- Plus One Section (shown if allowed) -->
+                        <div id="rsvpPlusOne" class="rsvp-plus-one" hidden>
+                            <div class="rsvp-plus-one-header">
+                                <label class="rsvp-checkbox-label">
+                                    <input type="checkbox" id="bringingPlusOne">
+                                    <span>I'm bringing a guest (+1)</span>
+                                </label>
+                            </div>
+                            <div id="plusOneDetails" class="rsvp-plus-one-details" hidden>
+                                <div class="rsvp-field">
+                                    <label for="plusOneName" class="rsvp-label">Guest's Full Name</label>
+                                    <input type="text" id="plusOneName" class="rsvp-input" placeholder="First and Last Name">
+                                </div>
+                                <div class="rsvp-meal-label">Meal preference:</div>
+                                <div class="rsvp-meal-options">
+                                    <label class="rsvp-radio-label rsvp-meal-option">
+                                        <input type="radio" name="plusOneMeal" value="seafood" id="plusOneSeafood" checked>
+                                        <span>Happy with Seafood Entrees</span>
+                                    </label>
+                                    <label class="rsvp-radio-label rsvp-meal-option">
+                                        <input type="radio" name="plusOneMeal" value="vegan" id="plusOneVegan">
+                                        <span>Vegan Entree (Pasta Pomodoro)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="rsvp-field rsvp-email-field">
+                            <label for="rsvpEmail" class="rsvp-label">Your Email (for confirmation)</label>
+                            <input type="email" id="rsvpEmail" class="rsvp-input" placeholder="email@example.com" required>
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit" id="rsvpSubmitBtn" class="btn btn-primary rsvp-submit">Submit RSVP</button>
+                        <p id="rsvpFormError" class="rsvp-error" hidden></p>
+                    </form>
+                </div>
+
+                <!-- Step 3: Success Message -->
+                <div id="rsvpSuccess" class="rsvp-step" hidden>
+                    <div class="rsvp-success-message">
+                        <h3>Thank You!</h3>
+                        <p>Your RSVP has been received. A confirmation email has been sent to <span id="confirmationEmail"></span>.</p>
+                        <div id="rsvpSummary" class="rsvp-summary"></div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -232,6 +302,7 @@
         </div>
     </footer>
 
+    <script src="guests.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

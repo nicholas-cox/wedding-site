@@ -31,6 +31,7 @@
         setupParallax();
         setupScrollAnimations();
         setupCountdown();
+        setupRSVP();
     }
 
     /**
@@ -364,6 +365,337 @@
 
         animatedElements.forEach(function(el) {
             observer.observe(el);
+        });
+    }
+
+    /**
+     * RSVP System
+     */
+    function setupRSVP() {
+        // Configuration
+        var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxmXPjOiucchhehlMhbcPMekLjOchz35p6odYzV6Ecx5QIY0PghkrFqwuhbgmIXtH_TBw/exec';
+
+        // DOM Elements
+        var lookupSection = document.getElementById('rsvpLookup');
+        var formSection = document.getElementById('rsvpForm');
+        var successSection = document.getElementById('rsvpSuccess');
+        var lookupForm = document.getElementById('rsvpLookupForm');
+        var responseForm = document.getElementById('rsvpResponseForm');
+        var guestNameInput = document.getElementById('guestNameInput');
+        var lookupError = document.getElementById('lookupError');
+        var guestListContainer = document.getElementById('rsvpGuestList');
+        var plusOneSection = document.getElementById('rsvpPlusOne');
+        var bringingPlusOneCheckbox = document.getElementById('bringingPlusOne');
+        var plusOneDetails = document.getElementById('plusOneDetails');
+        var plusOneNameInput = document.getElementById('plusOneName');
+        var emailInput = document.getElementById('rsvpEmail');
+        var submitBtn = document.getElementById('rsvpSubmitBtn');
+        var formError = document.getElementById('rsvpFormError');
+        var backBtn = document.getElementById('rsvpBackBtn');
+        var confirmationEmailSpan = document.getElementById('confirmationEmail');
+        var rsvpSummary = document.getElementById('rsvpSummary');
+
+        // State
+        var currentHousehold = null;
+
+        // Exit if RSVP elements don't exist
+        if (!lookupForm || !responseForm) return;
+
+        /**
+         * Look up a guest by name (case-insensitive, supports aliases)
+         */
+        function lookupGuest(name) {
+            var searchName = name.toLowerCase().trim();
+
+            for (var i = 0; i < GUESTS.length; i++) {
+                var household = GUESTS[i];
+
+                // Check primary member names
+                for (var j = 0; j < household.members.length; j++) {
+                    if (household.members[j].toLowerCase() === searchName) {
+                        return household;
+                    }
+                }
+
+                // Check aliases
+                if (household.aliases && household.aliases[searchName]) {
+                    return household;
+                }
+            }
+            return null;
+        }
+
+        /**
+         * Render the RSVP form for a household
+         */
+        function renderGuestForm(household) {
+            currentHousehold = household;
+            guestListContainer.innerHTML = '';
+
+            household.members.forEach(function(memberName, index) {
+                var guestDiv = document.createElement('div');
+                guestDiv.className = 'rsvp-guest-item';
+                guestDiv.innerHTML =
+                    '<div class="rsvp-guest-name">' + memberName + '</div>' +
+                    '<div class="rsvp-guest-options">' +
+                        '<label class="rsvp-radio-label">' +
+                            '<input type="radio" name="attending_' + index + '" value="yes" required>' +
+                            '<span>Joyfully Accepts</span>' +
+                        '</label>' +
+                        '<label class="rsvp-radio-label">' +
+                            '<input type="radio" name="attending_' + index + '" value="no" required>' +
+                            '<span>Regretfully Declines</span>' +
+                        '</label>' +
+                    '</div>' +
+                    '<div class="rsvp-meal-section" data-guest-index="' + index + '" hidden>' +
+                        '<div class="rsvp-meal-label">Meal preference:</div>' +
+                        '<div class="rsvp-meal-options">' +
+                            '<label class="rsvp-radio-label rsvp-meal-option">' +
+                                '<input type="radio" name="meal_' + index + '" value="seafood" checked>' +
+                                '<span>Happy with Seafood Entrees</span>' +
+                            '</label>' +
+                            '<label class="rsvp-radio-label rsvp-meal-option">' +
+                                '<input type="radio" name="meal_' + index + '" value="vegan">' +
+                                '<span>Vegan Entree (Pasta Pomodoro)</span>' +
+                            '</label>' +
+                        '</div>' +
+                    '</div>';
+                guestListContainer.appendChild(guestDiv);
+
+                // Add event listeners for attending radio buttons
+                var radios = guestDiv.querySelectorAll('input[name="attending_' + index + '"]');
+                radios.forEach(function(radio) {
+                    radio.addEventListener('change', function() {
+                        var mealSection = guestDiv.querySelector('.rsvp-meal-section');
+                        if (this.value === 'yes') {
+                            mealSection.hidden = false;
+                        } else {
+                            mealSection.hidden = true;
+                            // Reset to seafood when declining
+                            var seafoodRadio = mealSection.querySelector('input[value="seafood"]');
+                            if (seafoodRadio) seafoodRadio.checked = true;
+                        }
+                    });
+                });
+            });
+
+            // Show/hide plus one section
+            if (household.plusOneAllowed) {
+                plusOneSection.hidden = false;
+            } else {
+                plusOneSection.hidden = true;
+                bringingPlusOneCheckbox.checked = false;
+                plusOneDetails.hidden = true;
+            }
+        }
+
+        /**
+         * Collect form data for submission
+         */
+        function collectFormData() {
+            var data = {
+                householdId: currentHousehold.id,
+                email: emailInput.value.trim(),
+                guests: [],
+                plusOne: null
+            };
+
+            // Collect guest responses
+            currentHousehold.members.forEach(function(memberName, index) {
+                var attendingRadio = document.querySelector('input[name="attending_' + index + '"]:checked');
+                var mealRadio = document.querySelector('input[name="meal_' + index + '"]:checked');
+
+                if (attendingRadio) {
+                    data.guests.push({
+                        name: memberName,
+                        attending: attendingRadio.value === 'yes',
+                        vegan: attendingRadio.value === 'yes' && mealRadio && mealRadio.value === 'vegan'
+                    });
+                }
+            });
+
+            // Collect plus one data if applicable
+            if (currentHousehold.plusOneAllowed && bringingPlusOneCheckbox.checked) {
+                var plusOneMealRadio = document.querySelector('input[name="plusOneMeal"]:checked');
+                data.plusOne = {
+                    name: plusOneNameInput.value.trim(),
+                    vegan: plusOneMealRadio && plusOneMealRadio.value === 'vegan'
+                };
+            }
+
+            return data;
+        }
+
+        /**
+         * Validate form data
+         */
+        function validateForm(data) {
+            // Check all guests have responded
+            if (data.guests.length !== currentHousehold.members.length) {
+                return 'Please respond for all guests in your party.';
+            }
+
+            // Check email
+            if (!data.email || !data.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                return 'Please enter a valid email address.';
+            }
+
+            // Check plus one name if bringing one
+            if (data.plusOne && !data.plusOne.name) {
+                return 'Please enter your guest\'s name.';
+            }
+
+            return null;
+        }
+
+        /**
+         * Submit RSVP to Google Apps Script
+         */
+        function submitRSVP(data) {
+            if (!GOOGLE_SCRIPT_URL) {
+                // For testing without backend
+                console.log('RSVP Data:', data);
+                showSuccess(data);
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            formError.hidden = true;
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(function() {
+                // no-cors mode doesn't return response body, assume success
+                showSuccess(data);
+            })
+            .catch(function(error) {
+                console.error('RSVP submission error:', error);
+                formError.textContent = 'There was an error submitting your RSVP. Please try again or contact nicholasericcox@gmail.com';
+                formError.hidden = false;
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit RSVP';
+            });
+        }
+
+        /**
+         * Show success message
+         */
+        function showSuccess(data) {
+            formSection.hidden = true;
+            successSection.hidden = false;
+            confirmationEmailSpan.textContent = data.email;
+
+            // Build summary
+            var summaryHtml = '<ul>';
+            data.guests.forEach(function(guest) {
+                var status = guest.attending ? 'Attending' : 'Not attending';
+                var meal = guest.attending && guest.vegan ? ' (Vegan)' : '';
+                summaryHtml += '<li><strong>' + guest.name + '</strong>: ' + status + meal + '</li>';
+            });
+            if (data.plusOne) {
+                var plusOneMeal = data.plusOne.vegan ? ' (Vegan)' : '';
+                summaryHtml += '<li><strong>' + data.plusOne.name + '</strong> (+1): Attending' + plusOneMeal + '</li>';
+            }
+            summaryHtml += '</ul>';
+            rsvpSummary.innerHTML = summaryHtml;
+        }
+
+        /**
+         * Reset form to lookup state
+         */
+        function resetToLookup() {
+            lookupSection.hidden = false;
+            formSection.hidden = true;
+            successSection.hidden = true;
+            lookupError.hidden = true;
+            guestNameInput.value = '';
+            currentHousehold = null;
+        }
+
+        // Event: Lookup form submit
+        lookupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            lookupError.hidden = true;
+
+            var household = lookupGuest(guestNameInput.value);
+
+            if (household) {
+                renderGuestForm(household);
+                lookupSection.hidden = true;
+                formSection.hidden = false;
+            } else {
+                lookupError.hidden = false;
+            }
+        });
+
+        // Event: Back button
+        backBtn.addEventListener('click', function() {
+            resetToLookup();
+        });
+
+        // Event: Plus one checkbox toggle
+        bringingPlusOneCheckbox.addEventListener('change', function() {
+            plusOneDetails.hidden = !this.checked;
+            if (!this.checked) {
+                plusOneNameInput.value = '';
+                plusOneNameInput.classList.remove('input-error');
+                // Reset meal to seafood
+                var seafoodRadio = document.getElementById('plusOneSeafood');
+                if (seafoodRadio) seafoodRadio.checked = true;
+            }
+        });
+
+        // Clear error states on input
+        plusOneNameInput.addEventListener('input', function() {
+            this.classList.remove('input-error');
+            formError.hidden = true;
+        });
+
+        emailInput.addEventListener('input', function() {
+            this.classList.remove('input-error');
+            formError.hidden = true;
+        });
+
+        // Event: Response form submit
+        responseForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            formError.hidden = true;
+
+            // Clear any previous input errors
+            var errorInputs = responseForm.querySelectorAll('.input-error');
+            errorInputs.forEach(function(input) {
+                input.classList.remove('input-error');
+            });
+
+            var data = collectFormData();
+            var validationError = validateForm(data);
+
+            if (validationError) {
+                formError.textContent = validationError;
+                formError.hidden = false;
+
+                // Highlight specific fields
+                if (validationError.indexOf('guest\'s name') !== -1) {
+                    plusOneNameInput.classList.add('input-error');
+                    plusOneNameInput.focus();
+                } else if (validationError.indexOf('email') !== -1) {
+                    emailInput.classList.add('input-error');
+                    emailInput.focus();
+                }
+
+                // Scroll error into view
+                formError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            submitRSVP(data);
         });
     }
 
