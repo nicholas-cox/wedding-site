@@ -1,9 +1,5 @@
 # Claude Notes
 
-## Pending Tasks
-
-- **Registry section**: Ready to go live once registry items are loaded. Replace "Coming Soon" placeholder with Zola link (`https://www.zola.com/registry/koboscox/`). The Crate & Barrel registry is linked within Zola, so only one link needed. See commit `6330d7f` for the exact changes (was reverted in `f0a6716`).
-
 ## Project Overview
 
 Wedding website for Sarah Kobos & Nick Cox (September 19, 2026).
